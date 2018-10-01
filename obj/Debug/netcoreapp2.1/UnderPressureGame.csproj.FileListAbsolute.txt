@@ -1,0 +1,11 @@
+C:\source\codeworks\csharp\UnderPressureGame\bin\Debug\netcoreapp2.1\UnderPressureGame.deps.json
+C:\source\codeworks\csharp\UnderPressureGame\bin\Debug\netcoreapp2.1\UnderPressureGame.runtimeconfig.json
+C:\source\codeworks\csharp\UnderPressureGame\bin\Debug\netcoreapp2.1\UnderPressureGame.runtimeconfig.dev.json
+C:\source\codeworks\csharp\UnderPressureGame\bin\Debug\netcoreapp2.1\UnderPressureGame.dll
+C:\source\codeworks\csharp\UnderPressureGame\bin\Debug\netcoreapp2.1\UnderPressureGame.pdb
+C:\source\codeworks\csharp\UnderPressureGame\obj\Debug\netcoreapp2.1\UnderPressureGame.csprojAssemblyReference.cache
+C:\source\codeworks\csharp\UnderPressureGame\obj\Debug\netcoreapp2.1\UnderPressureGame.csproj.CoreCompileInputs.cache
+C:\source\codeworks\csharp\UnderPressureGame\obj\Debug\netcoreapp2.1\UnderPressureGame.AssemblyInfoInputs.cache
+C:\source\codeworks\csharp\UnderPressureGame\obj\Debug\netcoreapp2.1\UnderPressureGame.AssemblyInfo.cs
+C:\source\codeworks\csharp\UnderPressureGame\obj\Debug\netcoreapp2.1\UnderPressureGame.dll
+C:\source\codeworks\csharp\UnderPressureGame\obj\Debug\netcoreapp2.1\UnderPressureGame.pdb
