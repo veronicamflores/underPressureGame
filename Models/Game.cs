@@ -72,17 +72,8 @@ namespace UnderPressureGame.Models
             input = input.ToLower();
             switch (input)
             {
-                case "go north":
-                    North();
-                    break;
-                case "go south":
-                    South();
-                    break;
-                case "go west":
-                    West();
-                    break;
-                case "go east":
-                    East();
+                case "go":
+                    Go();
                     break;
                 case "use key":
                     UseKey();
@@ -132,7 +123,7 @@ namespace UnderPressureGame.Models
         //Should display a list of commands to the console
         void Help()
         {
-            Console.WriteLine("Go [north | south | west | east]");
+            Console.WriteLine("Go");
             Console.WriteLine("Look");
             Console.WriteLine("Quit");
             Console.WriteLine("Inventory");
@@ -157,6 +148,31 @@ namespace UnderPressureGame.Models
             Console.WriteLine(_currentRoom.Description + "\n");
         }
         //Directions
+
+        void Go()
+        {
+            Console.Write("What Direction Do You Go? ");
+            string direction = Console.ReadLine();
+            direction = direction.ToLower();
+            switch (direction)
+            {
+                case "north":
+                    North();
+                    break;
+                case "south":
+                    South();
+                    break;
+                case "west":
+                    West();
+                    break;
+                case "east":
+                    East();
+                    break;
+                default:
+                    Console.WriteLine("That isn't a direction you can go.");
+                    break;
+            }
+        }
         void North()
         {
             if (_currentRoom.Name == "Middle Of The Ocean")
