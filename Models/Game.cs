@@ -70,10 +70,17 @@ namespace UnderPressureGame.Models
             Console.WriteLine($"What Will You Do Next?");
             string input = Console.ReadLine();
             input = input.ToLower();
-            switch (input)
+            string command = input;
+            string option = "";
+            if (input.IndexOf(' ') > 0)
+            {
+                command = input.Substring(0, input.IndexOf(' ')).Trim();
+                option = input.Substring(input.IndexOf(' ')).Trim();
+            };
+            switch (command)
             {
                 case "go":
-                    Go();
+                    Go(option);
                     break;
                 case "use key":
                     UseKey();
@@ -149,10 +156,8 @@ namespace UnderPressureGame.Models
         }
         //Directions
 
-        void Go()
+        void Go(string direction)
         {
-            Console.Write("What Direction Do You Go? ");
-            string direction = Console.ReadLine();
             direction = direction.ToLower();
             switch (direction)
             {
