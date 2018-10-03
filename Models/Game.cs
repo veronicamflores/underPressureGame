@@ -17,8 +17,8 @@ namespace UnderPressureGame.Models
             Setup();
             while (playing)
             {
-                Console.WriteLine(_currentRoom.Name);
-                Console.WriteLine(_currentRoom.Description);
+                Console.WriteLine(_currentRoom.Name + "\n");
+                Console.WriteLine(_currentRoom.Description + "\n");
                 GetUserInput();
             }
         }
@@ -28,7 +28,7 @@ namespace UnderPressureGame.Models
         {
             playing = true;
 
-            Room oceanTop = new Room("Middle Of The Ocean", "You are a brave explorer hired by the eccentric Millionare Mr. E. You are dropped into the middle of the ocean in diving gear. To the north and east there is only ocean. To the west there appears to be a floating green plant.Below you there is only blurry looks into the deep \n");
+            Room oceanTop = new Room("Middle Of The Ocean", "You are a brave explorer hired by the eccentric Millionare Mr. E. You are dropped into the middle of the ocean in diving gear. To the north and east and west there is only ocean. Below you there is only blurry depths of the ocean. \n");
             Room oceanDown = new Room("Down In The Ocean", "In the ocean there are fishes and plants swimming all around you. To your east there is a dark cave opening. To your west there is dead fish. To the south there is a hatch which is locked \n");
             Room cave = new Room("Mysterious Cave", "The cave is dark there is a glinting to your north and east. To the south it is dark and to the west is the opening. \n ");
             Room oceanBottom = new Room("Ocean Floor", "It's darker here. To the south there is a shadowy figure swimming around. To your west and east there is nothing but darkness. \n");
@@ -55,20 +55,13 @@ namespace UnderPressureGame.Models
             oceanDown.Items.Add(food);
             cave.Items.Add(knife);
             cave.Items.Add(key);
-            oceanBottom.Items.Add(prize);
+            pit.Items.Add(prize);
 
             _currentRoom = oceanTop;
-            Console.Write("Hello clever Explorer!What is your name? ");
+            Console.Write("Hello clever Explorer! What is your name? ");
             string player = System.Console.ReadLine();
             _currentPlayer = new Player(player);
             _target = new Target("Bunyip", false);
-        }
-
-        // //Resets Game
-        void Reset()
-        {
-            Console.Clear();
-            StartGame();
         }
 
         //Gets the user input and calls the appropriate command
@@ -112,9 +105,6 @@ namespace UnderPressureGame.Models
                 case "quit":
                     Quit();
                     break;
-                case "reset":
-                    Reset();
-                    break;
                 case "help":
                     Help();
                     break;
@@ -125,7 +115,7 @@ namespace UnderPressureGame.Models
                     Look();
                     break;
                 case "take prize":
-                    Prize();
+                    TakePrize();
                     break;
                 default:
                     Console.WriteLine("That's not a good idea");
@@ -153,7 +143,7 @@ namespace UnderPressureGame.Models
         //Print the list of items in the players inventory to the console
         void Inventory()
         {
-            Console.WriteLine("You Have:");
+            Console.WriteLine("You Have: \n");
             foreach (var item in _currentPlayer.Inventory)
             {
                 Console.WriteLine(item.Name);
@@ -163,15 +153,15 @@ namespace UnderPressureGame.Models
         //Display the CurrentRoom Description, Exits, and Items
         void Look()
         {
-            Console.WriteLine(_currentRoom.Name);
-            Console.WriteLine(_currentRoom.Description);
+            Console.WriteLine(_currentRoom.Name + "\n");
+            Console.WriteLine(_currentRoom.Description + "\n");
         }
         //Directions
         void North()
         {
             if (_currentRoom.Name == "Middle Of The Ocean")
             {
-                Console.WriteLine("More Ocean");
+                Console.WriteLine("More Ocean \n");
             }
             else if (_currentRoom.Name == "Down In The Ocean")
             {
@@ -179,7 +169,7 @@ namespace UnderPressureGame.Models
             }
             else if (_currentRoom.Name == "Mysterious Cave")
             {
-                Console.WriteLine("In the darkness of the cave there appears to be a dagger stuck in the walls.");
+                Console.WriteLine("In the darkness of the cave there appears to be a dagger stuck in the walls. \n");
             }
             else if (_currentRoom.Name == "Ocean Floor")
             {
@@ -188,14 +178,14 @@ namespace UnderPressureGame.Models
         }
         void South()
         {
-            Item key = _currentPlayer.Inventory.Find(i => i.Name == "Key");
             if (_currentRoom.Name == "Middle Of The Ocean")
             {
                 _currentRoom = GameRooms["oceanDown"];
             }
             else if (_currentRoom.Name == "Down In The Ocean")
             {
-                if (key.Taken == true)
+                Item key = _currentPlayer.Inventory.Find(i => i.Name == "Key");
+                if (key != null && key.Taken == true)
                 {
                     _currentRoom = GameRooms["oceanBottom"];
                 }
@@ -235,11 +225,11 @@ namespace UnderPressureGame.Models
         {
             if (_currentRoom.Name == "Middle Of The Ocean")
             {
-                Console.WriteLine("On closer inspection the plant is a glowing algea.");
+                Console.WriteLine("More Ocean \n");
             }
             else if (_currentRoom.Name == "Down In The Ocean")
             {
-                Console.WriteLine("The dead fish reeks here");
+                Console.WriteLine("The dead fish reeks here \n");
             }
             else if (_currentRoom.Name == "Mysterious Cave")
             {
@@ -247,14 +237,14 @@ namespace UnderPressureGame.Models
             }
             else if (_currentRoom.Name == "Ocean Floor")
             {
-                Console.WriteLine("There is nothing here but the darkness");
+                Console.WriteLine("There is nothing here but the darkness \n");
             }
         }
         void East()
         {
             if (_currentRoom.Name == "Middle Of The Ocean")
             {
-                Console.WriteLine("More Ocean");
+                Console.WriteLine("More Ocean \n");
             }
             else if (_currentRoom.Name == "Down In The Ocean")
             {
@@ -262,11 +252,11 @@ namespace UnderPressureGame.Models
             }
             else if (_currentRoom.Name == "Mysterious Cave")
             {
-                Console.WriteLine("Here there appears to be a key glinting in all the plants");
+                Console.WriteLine("Here there appears to be a key glinting in all the plants \n");
             }
             else if (_currentRoom.Name == "Ocean Floor")
             {
-                Console.WriteLine("There is nothing here but darkness");
+                Console.WriteLine("There is nothing here but darkness \n");
             }
         }
         //Taking Items
@@ -315,7 +305,7 @@ namespace UnderPressureGame.Models
                 Console.WriteLine($"You now Have {food.Name} in Your Inventory \n");
             }
         }
-        void Prize()
+        void TakePrize()
         {
             if (_currentRoom.Name != "Dark Ocean Floor")
             {
@@ -327,6 +317,7 @@ namespace UnderPressureGame.Models
                 _currentPlayer.Inventory.Add(prize);
                 _currentRoom.Items.Remove(prize);
                 Console.WriteLine($"You now Have {prize.Name} in Your Inventory");
+                Won();
             }
         }
         //Use Items
@@ -336,22 +327,23 @@ namespace UnderPressureGame.Models
             if (_currentRoom.Name == "Down In The Ocean" && _currentPlayer.Inventory.Contains(key))
             {
                 key.Taken = true;
-                Console.WriteLine("You Used The Key. The Hatch is Unlocked");
+                Console.WriteLine("You Used The Key. The Hatch is Unlocked \n");
+                _currentRoom.Description = "In the ocean there are fishes and plants swimming all around you. To your east there is a dark cave opening. To your west there is dead fish. To the south there is a hatch which is now unlocked \n";
             }
             else
             {
-                Console.WriteLine("Where Would You Even Use The Key?");
+                Console.WriteLine("Where Would You Even Use The Key? \n");
             }
         }
         void Fight()
         {
             if (_currentRoom.Name != "Bottom Of The Ocean" && _target.Active != true)
             {
-                Console.WriteLine("Why Would You Use the Dagger");
+                Console.WriteLine("Why Would You Use the Dagger? \n");
             }
             else
             {
-                Console.WriteLine($"The Bunyip is at {_target.Health} health.");
+                Console.WriteLine($"The Bunyip is at {_target.Health} health. \n");
                 _target.Health -= 10;
                 _currentPlayer.Health -= 50;
             }
@@ -361,11 +353,11 @@ namespace UnderPressureGame.Models
         {
             if (_currentRoom.Name != "Bottom Of The Ocean" && _target.Active != true)
             {
-                Console.WriteLine("Why Would You Use the dead Fish?");
+                Console.WriteLine("Why Would You Use the dead Fish? \n");
             }
             else
             {
-                Console.WriteLine("You Feed the dead fish to the Bunyip. It swims away with its food. Where the bunyip had been there is the prize you have been looking for");
+                Console.WriteLine("You Feed the dead fish to the Bunyip. It swims away with its food. Where the bunyip had been there is the prize you have been looking for. \n");
                 _currentRoom.Description = "There is no more bunyip here";
             }
             Won();
@@ -375,7 +367,7 @@ namespace UnderPressureGame.Models
             if (_currentPlayer.Health <= 0)
             {
                 Console.Clear();
-                Console.WriteLine("You DIE because how in the world did you think you would defeat a monster with a dagger?");
+                Console.WriteLine(" \n You DIE because how in the world did you think you would defeat a monster with a dagger? \n");
                 playing = false;
             }
         }
@@ -384,7 +376,7 @@ namespace UnderPressureGame.Models
             Item prize = _currentPlayer.Inventory.Find(i => i.Name == "PRIZE");
             if (prize != null)
             {
-                Console.WriteLine("You Won!! Now It is time to give the prize to Mr. E!!");
+                Console.WriteLine("You Won!! Now It is time to give the prize to Mr. E. \n");
                 playing = false;
             }
         }
