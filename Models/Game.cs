@@ -82,23 +82,11 @@ namespace UnderPressureGame.Models
                 case "go":
                     Go(option);
                     break;
-                case "use key":
-                    UseKey();
+                case "use":
+                    Use(option);
                     break;
-                case "use dagger":
-                    Fight();
-                    break;
-                case "use dead fish":
-                    UseFood();
-                    break;
-                case "take key":
-                    TakeKey();
-                    break;
-                case "take dagger":
-                    TakeDagger();
-                    break;
-                case "take dead fish":
-                    TakeFood();
+                case "take":
+                    Take(option);
                     break;
                 case "quit":
                     Quit();
@@ -111,9 +99,6 @@ namespace UnderPressureGame.Models
                     break;
                 case "look":
                     Look();
-                    break;
-                case "take prize":
-                    TakePrize();
                     break;
                 default:
                     Console.WriteLine("That's not a good idea");
@@ -281,6 +266,29 @@ namespace UnderPressureGame.Models
             }
         }
         //Taking Items
+
+        void Take(string item)
+        {
+            item = item.ToLower();
+            switch (item)
+            {
+                case "key":
+                    TakeKey();
+                    break;
+                case "fish":
+                    TakeFood();
+                    break;
+                case "dagger":
+                    TakeDagger();
+                    break;
+                case "prize":
+                    TakePrize();
+                    break;
+                default:
+                    Console.WriteLine("That isn't a valid item.");
+                    break;
+            }
+        }
         void TakeKey()
         {
             if (_currentRoom.Name != "Mysterious Cave")
@@ -342,6 +350,25 @@ namespace UnderPressureGame.Models
             }
         }
         //Use Items
+        void Use(string item)
+        {
+            item = item.ToLower();
+            switch (item)
+            {
+                case "key":
+                    UseKey();
+                    break;
+                case "fish":
+                    UseFood();
+                    break;
+                case "dagger":
+                    Fight();
+                    break;
+                default:
+                    Console.WriteLine("That isn't a valid item.");
+                    break;
+            }
+        }
         void UseKey()
         {
             Item key = _currentPlayer.Inventory.Find(i => i.Name == "Key");
